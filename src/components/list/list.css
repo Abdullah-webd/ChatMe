@@ -1,0 +1,13 @@
+.list{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+
+/* Track (background) */
+* {
+    scrollbar-width: none; /* Hides the scrollbar */
+}
