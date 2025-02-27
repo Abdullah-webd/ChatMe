@@ -13,7 +13,6 @@ const ChatList = () => {
 
   const currentUser = useUserStore.getState().currentUser;
   const { chatId, changeChat } = useChatStore();
-  console.log(chatId);
 
   useEffect(() => {
     const onSub = onSnapshot(

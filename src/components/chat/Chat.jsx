@@ -20,7 +20,6 @@ const Chat = () => {
   // const {currentUser} = useChatStore()
   const currentUser = useUserStore.getState().currentUser
 
-  console.log(currentUser)
 
   const handleImg = (e) => {
     if (e.target.files[0]){
@@ -33,18 +32,16 @@ const Chat = () => {
 }
 
   const {chatId,user,isCurrentUserBlocked,isRecieverBlocked} = useChatStore()
-  console.log(chatId)
+
 
   useEffect(()=>{
     const unSub = onSnapshot(doc(db,'chats',chatId),(res)=>{
       setChat(res.data())
-      console.log(chat)
 
       return()=>{
         unSub()
       }
     })
-    console.log(chat)
     
   },[chatId])
 
@@ -118,7 +115,6 @@ const Chat = () => {
    
     
   },[])
-  console.log(chatId)
  
 
   
