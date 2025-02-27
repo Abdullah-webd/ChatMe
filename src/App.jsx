@@ -1,4 +1,4 @@
-import { List } from "./components/list/list"
+// import { List } from "./components/list/list"
 import Chat from "./components/chat/Chat"
 import { Details } from "./components/details/Details"
 import { useEffect } from "react"
@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "./lib/firebase"
 import { useUserStore } from "./lib/userstore"
 import { useChatStore } from "./lib/chatstore"
+import { List } from "./components/list/list"
 const App = () => {
   const user = false
   const {chatId} = useChatStore()
