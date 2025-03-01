@@ -9,7 +9,15 @@ import { db } from '../../lib/firebase'
 import { useChatStore } from '../../lib/chatstore'
 import { useUserStore } from '../../lib/userstore'
 import uploadImageAndGetURL from '../../lib/supabase'
-const Chat = () => {
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+
+
+
+
+export const Chat = ({toggle}) => {
+  
+  const mess='hi'
+  const [collapse, setCollapse] = useState(false)
   const [chat,setChat] = useState()
   const [open,setOpen] = useState(false)
   const [text,setText] = useState('')
@@ -59,7 +67,7 @@ const Chat = () => {
     let imgUrl = null;
 
     try {
-
+      
       if(img.file){
         imgUrl = await uploadImageAndGetURL(img.file)
       }
@@ -112,81 +120,84 @@ const Chat = () => {
   const endRef = useRef(null)
   useEffect(()=>{
     endRef.current?.scrollIntoView({ behavior: "smooth" })
-   
+    
     
   },[])
- 
-
   
-
-
+  
+  
+  
+  
   return (
-    <div className='chat'>
-      <div className="top">
-        <div className="user">
-          <img src={user?.avatars || "./avatar.png"} alt="" />
-          <div className="texts">
-            <span>{user?.username}</span>
-            <p>Hey i'm using ChatMe
-            </p>
+    
+      <div className='chat'>
+        <div className="top">
+          <div className="user">
+            <img src={user?.avatars || "./avatar.png"} alt="" />
+            <div className="texts">
+              <span>{user?.username}</span>
+              <p>Hey i'm using ChatMe
+              </p>
+            </div>
+          </div>
+          <div className="icons">
+            <img src="./phone.png" alt="" />
+            <img src="./video.png" alt="" />
+            <div onClick={() => window.innerWidth <= 768 && toggle()}><FaArrowAltCircleLeft style={{fontSize:'15px',cursor:'pointer'}}  /></div>
+            
           </div>
         </div>
-        <div className="icons">
-          <img src="./phone.png" alt="" />
-          <img src="./video.png" alt="" />
-          <img src="./info.png" alt="" />
-        </div>
-      </div>
-      <div className="center">
-        { chat?.messages.map((message)=>(
-            <div className={message.senderId === currentUser?.id ? "message own" : 'message'} key={message?.createdAt}>
-              <div className="texts">
-                {message.img && <img src={message.img} alt="" />}
-                <p>
-                {
-                  message.text
-                }
+        <div className="center">
+          { chat?.messages.map((message)=>(
+              <div className={message.senderId === currentUser?.id ? "message own" : 'message'} key={message?.createdAt}>
+                <div className="texts">
+                  {message.img && <img src={message.img} alt="" />}
+                  <p>
+                  {
+                    message.text
+                  }
 
-                </p>
-                {/* <span>{message.createdAt}</span> */}
-              </div>
+                  </p>
+                  {/* <span>{message.createdAt}</span> */}
+                </div>
+          
+            </div>
+          ))
+          
+          }
+          {
+            img.url && <div className='message own'>
+                <div className='texts'>
+                  <img src={img.url} alt="" />
+                </div>
+            </div>
+          }
+          <div ref={endRef}></div>
+        </div>
+        <div className="bottom">
+          <div className="icons">
+            <label htmlFor="file">
+              <img src="./img.png" alt="" />
+            </label>
+            
+            <input type="file" id='file' style={{display:'none'}} onChange={(e)=>handleImg(e)}/>
+            <img src="./camera.png" alt="" />
+            <img src="./mic.png" alt="" />
+          </div>
+          <input type="text" 
+          value={text} placeholder={isCurrentUserBlocked ||isRecieverBlocked ? 'You cannot type a message':'Type a message...'}  onChange={(e)=>setText(e.target.value)} disabled={isCurrentUserBlocked || isRecieverBlocked}/>
+          <div className='emoji'>
+            <img src="./emoji.png" alt="" onClick={()=>setOpen((prev)=>!prev)}/>
+            <div className="picker">
+            <EmojiPicker open={open} onEmojiClick={(e)=>handleEmoji(e)}/>
+            </div>
+            
+          </div>
+          <button className='sendButton' onClick={()=>handleSend()} disabled={isCurrentUserBlocked || isRecieverBlocked}>Send</button>
+        </div >
+          
         
-          </div>
-        ))
-         
-        }
-        {
-          img.url && <div className='message own'>
-              <div className='texts'>
-                <img src={img.url} alt="" />
-              </div>
-          </div>
-        }
-        <div ref={endRef}></div>
       </div>
-      <div className="bottom">
-        <div className="icons">
-          <label htmlFor="file">
-            <img src="./img.png" alt="" />
-          </label>
-          
-          <input type="file" id='file' style={{display:'none'}} onChange={(e)=>handleImg(e)}/>
-          <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
-        </div>
-        <input type="text" 
-        value={text} placeholder={isCurrentUserBlocked ||isRecieverBlocked ? 'You cannot type a message':'Type a message...'}  onChange={(e)=>setText(e.target.value)} disabled={isCurrentUserBlocked || isRecieverBlocked}/>
-        <div className='emoji'>
-          <img src="./emoji.png" alt="" onClick={()=>setOpen((prev)=>!prev)}/>
-          <div className="picker">
-          <EmojiPicker open={open} onEmojiClick={(e)=>handleEmoji(e)}/>
-          </div>
-          
-        </div>
-        <button className='sendButton' onClick={()=>handleSend()} disabled={isCurrentUserBlocked || isRecieverBlocked}>Send</button>
-      </div>
-    </div>
   )
 }
 
-export default Chat

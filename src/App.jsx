@@ -1,5 +1,5 @@
 // import { List } from "./components/list/list"
-import Chat from "./components/chat/Chat"
+import { Chat } from "./components/chat/Chat"
 import { Details } from "./components/details/Details"
 import { useEffect } from "react"
 import Login from "./components/Login/Login"
@@ -9,9 +9,12 @@ import { auth } from "./lib/firebase"
 import { useUserStore } from "./lib/userstore"
 import { useChatStore } from "./lib/chatstore"
 import { List } from "./components/list/Liist"
+import { useState } from "react"
 const App = () => {
+  const [show,setShow] = useState(true)
   const user = false
   const {chatId} = useChatStore()
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
   const {currentUser,isLoading,fetchUserInfo} = useUserStore()
   useEffect(()=>{
     const sub = onAuthStateChanged(auth,(user)=>{
@@ -32,10 +35,26 @@ const App = () => {
       {
       currentUser ? (
           <>
-            <List/>
+          
+            {isLargeScreen ? <>
+              <List toggle ={()=> setShow(false)}/>
 
-            {chatId && <Chat/>}
-            {chatId && <Details/>}
+              {chatId && <Chat toggle ={()=> setShow(true)}/>}
+              {chatId && <Details/>} 
+            </> : <>
+                  {
+
+                    show ? <>
+                      <List toggle ={()=> setShow(false)}/>
+                    </> : <>
+                      
+                      {chatId && <Chat toggle ={()=> setShow(true)}/>}
+                      {chatId && <Details/>}
+                    </>
+                  }
+
+            </> 
+            }
           </>
           
         ) : (<Login/>)

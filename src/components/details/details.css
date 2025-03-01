@@ -107,3 +107,11 @@
         }
     }
 }
+
+
+@media (max-width: 768px) {
+    .details{
+        display: none;
+    }
+
+  }

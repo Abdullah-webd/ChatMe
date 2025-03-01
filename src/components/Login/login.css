@@ -62,3 +62,22 @@
         background-color:#dddddd35 ;
     }
 }
+
+
+@media (max-width: 768px) {
+    .login {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        
+        align-items: center;
+    
+        .seperator{
+            height: 2px;
+            width:80%;
+            background-color:#dddddd35 ;
+            
+        }
+    }
+
+  }
