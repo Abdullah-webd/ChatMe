@@ -166,3 +166,24 @@
         }
     }
 }
+
+.message.own {
+    align-items: flex-start;
+    justify-content: flex-start;
+} 
+
+@media (max-width:768px ){
+    .chat{
+        width: 100vw;
+    } 
+    .bottom input{
+        width: 120px;
+    }
+    .cam{
+        display: none;
+    }   
+    .mic{
+        display: none;
+    }
+    
+}

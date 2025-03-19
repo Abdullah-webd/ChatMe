@@ -181,8 +181,8 @@ export const Chat = ({toggle}) => {
             </label>
             
             <input type="file" id='file' style={{display:'none'}} onChange={(e)=>handleImg(e)}/>
-            <img src="./camera.png" alt="" />
-            <img src="./mic.png" alt="" />
+            <img className='cam' src="./camera.png" alt="" />
+            <img className='mic' src="./mic.png" alt="" />
           </div>
           <input type="text" 
           value={text} placeholder={isCurrentUserBlocked ||isRecieverBlocked ? 'You cannot type a message':'Type a message...'}  onChange={(e)=>setText(e.target.value)} disabled={isCurrentUserBlocked || isRecieverBlocked}/>

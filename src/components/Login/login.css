@@ -1,6 +1,6 @@
 .login{
     width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
     align-items: center;
     gap: 100px;
@@ -64,6 +64,8 @@
 }
 
 
+
+
 @media (max-width: 768px) {
     .login {
         display: flex;
@@ -71,6 +73,11 @@
         gap: 20px;
         
         align-items: center;
+
+        form{
+            gap: 10px;
+        }
+
     
         .seperator{
             height: 2px;
@@ -79,5 +86,7 @@
             
         }
     }
+
+    
 
   }

@@ -19,7 +19,6 @@ const App = () => {
   useEffect(()=>{
     const sub = onAuthStateChanged(auth,(user)=>{
       fetchUserInfo(user?.uid)
-
     })
 
   },[fetchUserInfo])
