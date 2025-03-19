@@ -10,11 +10,16 @@ import { useChatStore } from '../../lib/chatstore'
 import { useUserStore } from '../../lib/userstore'
 import uploadImageAndGetURL from '../../lib/supabase'
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 
 export const Chat = ({toggle}) => {
+  const navigate = useNavigate()
+  const openVideoCall = () => {
+    window.open("/videocall", "_blank"); // Opens /videocall in a new tab
+  };
   
   const mess='hi'
   const [collapse, setCollapse] = useState(false)
@@ -141,9 +146,9 @@ export const Chat = ({toggle}) => {
             </div>
           </div>
           <div className="icons">
-            <img src="./phone.png" alt="" />
-            <img src="./video.png" alt="" />
-            <div onClick={() => window.innerWidth <= 768 && toggle()}><FaArrowAltCircleLeft style={{fontSize:'15px',cursor:'pointer'}}  /></div>
+            <img onClick={()=>openVideoCall()} src="./phone.png" alt="" />
+            <img onClick={()=>openVideoCall()} src="./video.png" alt="" />
+            <div onClick={() => window.innerWidth <= 1024 && toggle()}><FaArrowAltCircleLeft style={{fontSize:'15px',cursor:'pointer'}}  /></div>
             
           </div>
         </div>

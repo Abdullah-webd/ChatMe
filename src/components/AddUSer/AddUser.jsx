@@ -19,6 +19,8 @@ const AddUser = () => {
 
         if(!querySnapShot.empty){
           setUser(querySnapShot.docs[0].data())
+        }else{
+          alert('user does not exist')
         }
       } catch (error) {
         console.log(error)
@@ -61,6 +63,7 @@ const AddUser = () => {
     }
   return (
     <div className='adduser'>
+      <p style={{paddingBottom:10}}>Click on the minus icon to collapse</p>
         <form onSubmit={(e)=>handleSearch(e)}>
             <input type="text" placeholder="username" name='username'/>
             <button>search</button>

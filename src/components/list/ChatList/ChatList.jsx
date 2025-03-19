@@ -77,7 +77,7 @@ ChatList = ({toggle}) => {
           onClick={() => setAdMode((prev) => !prev)}
         />
       </div>
-      <div onClick={() => window.innerWidth <= 768 && toggle()}>
+      <div onClick={() => window.innerWidth <= 1024 && toggle()}>
           {filteredChats.map((chat) => (
             <div
               className="item"

@@ -1,8 +1,13 @@
 import React from 'react'
 import './userinfo.css'
 import { useUserStore } from '../../../lib/userstore'
+import { useNavigate } from 'react-router-dom'
 const UserInfo = () => {
   const {currentUser} = useUserStore()
+  const navigate = useNavigate()
+  const openVideoCall = () => {
+    window.open("/videocall", "_blank"); // Opens /videocall in a new tab
+  };
   return (
     <div className='userinfo'>
         <div className="user">
@@ -11,7 +16,7 @@ const UserInfo = () => {
         </div>
         <div className="icons">
             <img src="./more.png" alt="" />
-            <img src="./video.png" alt="" />
+            <img onClick={()=>openVideoCall()} src="./video.png" alt="" />
             <img src="./edit.png" alt="" />
         </div>
     </div>
