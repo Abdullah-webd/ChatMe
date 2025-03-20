@@ -16,6 +16,7 @@ import { getDoc } from 'firebase/firestore';
 import { where } from 'firebase/firestore';
 const Login = () => {
     const [loading,setLoading] = useState(false)
+    const [close,setClose] = useState(false)
 
     const [avatar,setAvatar] = useState({
         file:null,
@@ -97,6 +98,16 @@ const Login = () => {
     }
   return (
     <div className='login'>
+        <div class="overlay" style={{display: close ?   'none' : '' }}>
+            <div class="guide-box">
+                <button class="close-btn"  onClick={()=>setClose(true)}>✖</button>
+                <h2>Welcome to Chat Me</h2>
+                <p><strong>1. Create an Account:</strong> Register and get redirected to the home screen.</p>
+                <p><strong>2. Add a User:</strong> Click the (+) icon, search for "Abdullah", and click "Add User".</p>
+                <p><strong>3. Remove Add User Field:</strong> Click the (-) icon to close it.</p>
+                <p><strong>4. Start Chatting:</strong> Click on the chat to begin messaging.</p>
+            </div>
+        </div>
         <div className="item">
             <h1>Welcome Back,</h1>
             <form onSubmit={(e)=>handleLogin(e)}>
@@ -118,6 +129,7 @@ const Login = () => {
                 <button disabled={loading}>{loading? 'loading' : 'Sign Up'}</button>
             </form>
         </div>
+        
     </div>
   )
 }
